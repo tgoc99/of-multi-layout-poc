@@ -21,38 +21,17 @@ type TabsContainerState = {
     value: number;
     lastActiveTab: number;
     layouts: LayoutState[];
-    nextTabValue: number;
-    initialLayout: OpenFin.LayoutOptions;
-};
-
-type TabsSnapshot = OpenFin.LayoutSnapshot & {
-    order?: string[];
 };
 
 const makeOverride = (container: TabsContainer) => (Base: OpenFin.LayoutManagerConstructor<OpenFin.LayoutSnapshot>) =>
     class MTPOverride extends Base {
 
-        applyLayoutSnapshot = async (snapshot: TabsSnapshot): Promise<void> => {
+        applyLayoutSnapshot = async (snapshot: OpenFin.LayoutSnapshot): Promise<void> => {
             console.log(`applyLayoutSnapshot() called`);
             const { layouts } = snapshot;
-            const initialLayout = {
-                type: 'stack',
-                content: [
-                    {
-                        type: 'component',
-                        componentName: 'view',
-                        componentState: {
-                            url: 'http://localhost:3000/'
-                        }
-                    }
-                ]
-            };
             // save the counter for naming new tabs, we name our tabs 1-based so add 1
-            const nextTabValue = Object.keys(layouts).length + 1;
             container.setState({
                 layouts: Object.keys(layouts).map((layoutName: string) => ({ layoutName, layout: layouts[layoutName] })),
-                initialLayout,
-                nextTabValue
             });
             console.log(`state has been set`);
         };
@@ -74,8 +53,6 @@ export default class TabsContainer extends Component<{}, TabsContainerState> {
         layouts: [] as LayoutState[],
         value: 0,
         lastActiveTab: 0,
-        nextTabValue: 0,
-        initialLayout: {} as OpenFin.LayoutOptions
     };
 
     componentDidMount(): void {
