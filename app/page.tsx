@@ -2,14 +2,13 @@
 'use client';
 import { Box, Tab, Tabs } from '@mui/material';
 import OpenFin, { fin } from '@openfin/core';
-import React, { CSSProperties, Component, ReactNode, useEffect, useRef } from 'react';
+import React, { CSSProperties, useEffect, useRef } from 'react';
 
-// '& svg': { height: '0.6em', width: '0.6em' }
 const styles: Record<string, CSSProperties> = {
     tab: { padding: '4px 8px', minHeight: '28px', height: '28px' },
     tabIndicator: { transition: 'all 0.08s linear' },
     tabContainer: { minHeight: '32px', height: '32px', padding: 0 },
-    layoutConatiner: { height: '100%', width: '100%', overflow: 'hidden' }
+    layoutContainer: { height: '100%', width: '100%', overflow: 'hidden' }
 };
 
 type LayoutState = {
@@ -17,95 +16,65 @@ type LayoutState = {
     layout: OpenFin.LayoutOptions;
 };
 
-type TabsContainerState = {
-    value: number;
-    lastActiveTab: number;
-    layouts: LayoutState[];
-};
-
-const makeOverride = (container: TabsContainer) => (Base: OpenFin.LayoutManagerConstructor<OpenFin.LayoutSnapshot>) =>
-    class MTPOverride extends Base {
-
-        applyLayoutSnapshot = async (snapshot: OpenFin.LayoutSnapshot): Promise<void> => {
-            console.log(`applyLayoutSnapshot() called`);
-            const { layouts } = snapshot;
-            // save the counter for naming new tabs, we name our tabs 1-based so add 1
-            container.setState({
-                layouts: Object.keys(layouts).map((layoutName: string) => ({ layoutName, layout: layouts[layoutName] })),
-            });
-            console.log(`state has been set`);
-        };
-
-        public showLayout = async (id: OpenFin.LayoutIdentity) => {
-            if (id.layoutName) {
-                container.setState((s) => {
-                    const newIndex = s.layouts.findIndex((x) => x.layoutName === id.layoutName);
-                    return {
-                        value: newIndex !== 1 ? newIndex : s.value
-                    };
-                });
-            }
-        };
-    };
-
-export default class TabsContainer extends Component<{}, TabsContainerState> {
-    state = {
-        layouts: [] as LayoutState[],
-        value: 0,
-        lastActiveTab: 0,
-    };
-
-    componentDidMount(): void {
-        console.log(`--- before layout init`);
-        fin.Platform.Layout.init({ layoutManagerOverride: makeOverride(this) });
-        console.log(`--- after layout init`);
-    }
-
-    private handleTabChange = (_: React.SyntheticEvent, index: number) => {
-        this.setState((s) => {
-            const state = {
-                value: Math.min(index, s.layouts.length - 1),
-                lastActiveTab: Math.min(s.value, s.layouts.length - 1)
+const makeOverride = (setLayouts: React.Dispatch, setCurrentActiveTab: React.Dispatch) =>
+    (Base: OpenFin.LayoutManagerConstructor<OpenFin.LayoutSnapshot>) =>
+        class POCOverride extends Base {
+            // OpenFin internals call this method in layout initialization, here we use it to set our React state
+            applyLayoutSnapshot = ({ layouts }: OpenFin.LayoutSnapshot): void => {
+                // This logic turns a JS Object into an array, per JS internals, order of object keys in the array is not guaranteed
+                setLayouts(Object.keys(layouts).map((layoutName: string) => ({ layoutName, layout: layouts[layoutName] })));
             };
-            console.log(`handleTabChange`, { ...state, ...s.layouts });
-            return state;
-        });
+
+            // Not necessary for this example - to be called by OpenFin API internals
+            // (i.e. replaceLayout API or to surface the corresponding layout when view.focus() is called)
+            public showLayout = async (id: OpenFin.LayoutIdentity) => {
+                if (id.layoutName) {
+                    const newIndex = layouts.findIndex((x) => x.layoutName === id.layoutName);
+                    if (newIndex !== -1) {
+                        setCurrentActiveTab(newIndex)
+                    }
+                };
+            };
+        };
+
+export default function TabsContainer(): JSX.Element {
+    const [layouts, setLayouts] = React.useState<LayoutState[]>([]);
+    const [currentActiveTab, setCurrentActiveTab] = React.useState<number>(0);
+
+    useEffect(() => {
+        fin.Platform.Layout.init({ layoutManagerOverride: makeOverride(setLayouts, setCurrentActiveTab) });
+    }, [])
+
+    const handleTabChange = (_: React.SyntheticEvent, index: number) => {
+        // Active tab index state -> LayoutContainer "active" prop -> hidden state of container
+        setCurrentActiveTab(Math.min(index, layouts.length - 1))
     };
 
-    render(): ReactNode {
-        return (
-            <div id="layout-container" >
-                <Box sx={{ width: '100%', height: '100%' }}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs
-                            value={this.state.value}
-                            onChange={this.handleTabChange}
-                            aria-label="basic tabs example"
-                            sx={styles.tabContainer}
-                            TabIndicatorProps={{ sx: styles.tabIndicator }}
-                        >
-                            {this.state.layouts.map(({ layoutName }, i) => (
-                                <Tab
-                                    sx={styles.tab}
-                                    key={layoutName}
-                                    label={layoutName}
-                                />
-                            ))}
-
-                        </Tabs>
-                    </Box>
-                    {this.state.layouts.map((layout, i) => (
-                        <LayoutContainer active={this.state.value === i} key={layout.layoutName} {...layout} />
-                    ))}
+    return (
+        <div id="layout-container" >
+            <Box sx={{ width: '100%', height: '100%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs
+                        value={currentActiveTab}
+                        onChange={handleTabChange}
+                        aria-label="basic tabs example"
+                        sx={styles.tabContainer}
+                        TabIndicatorProps={{ sx: styles.tabIndicator }}
+                    >
+                        {layouts.map(({ layoutName }) => (
+                            <Tab sx={styles.tab} key={layoutName} label={layoutName} />
+                        ))}
+                    </Tabs>
                 </Box>
-            </div>
-        );
-    }
+                {layouts.map((layout, i) => (
+                    <LayoutContainer active={currentActiveTab === i} key={layout.layoutName} {...layout} />
+                ))}
+            </Box>
+        </div>
+    );
 }
 
-type LayoutContainerProps = LayoutState & { active: boolean };
-
-const LayoutContainer = ({ layoutName, layout, active }: LayoutContainerProps) => {
+const LayoutContainer = ({ layoutName, layout, active }: LayoutState & { active: boolean }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
         const container = containerRef.current!;
@@ -115,5 +84,5 @@ const LayoutContainer = ({ layoutName, layout, active }: LayoutContainerProps) =
         };
     }, []);
 
-    return <div ref={containerRef} className={active ? '' : 'hidden'} style={styles.layoutConatiner}></div>;
+    return <div ref={containerRef} className={active ? '' : 'hidden'} style={styles.layoutContainer}></div>;
 };
