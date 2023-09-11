@@ -31,28 +31,28 @@ type TabsSnapshot = OpenFin.LayoutSnapshot & {
 
 const makeOverride = (container: TabsContainer) => (Base: OpenFin.LayoutManagerConstructor<OpenFin.LayoutSnapshot>) =>
     class MTPOverride extends Base {
-        private checkOrder = (snapshot: TabsSnapshot) => {
-            if (!snapshot.order) return Object.keys(snapshot.layouts);
-            // Check that all keys in order are on the layouts and all layouts are in order
-            if (
-                snapshot.order.filter((x: string) => !!snapshot.layouts[x]).length !==
-                Object.keys(snapshot.layouts).length
-            ) {
-                return Object.keys(snapshot.layouts);
-            }
-            return snapshot.order;
-        };
+        // private checkOrder = (snapshot: TabsSnapshot) => {
+        //     if (!snapshot.order) return Object.keys(snapshot.layouts);
+        //     // Check that all keys in order are on the layouts and all layouts are in order
+        //     if (
+        //         snapshot.order.filter((x: string) => !!snapshot.layouts[x]).length !==
+        //         Object.keys(snapshot.layouts).length
+        //     ) {
+        //         return Object.keys(snapshot.layouts);
+        //     }
+        //     return snapshot.order;
+        // };
 
-        async getLayoutSnapshot(): Promise<TabsSnapshot> {
-            console.log(`getLayoutSnapshot() called`);
-            const base = await super.getLayoutSnapshot();
-            const order = container.state.layouts.map((x) => x.layoutName).filter((x) => !!base.layouts[x]);
-            return { ...base, order };
-        }
+        // async getLayoutSnapshot(): Promise<TabsSnapshot> {
+        //     console.log(`getLayoutSnapshot() called`);
+        //     const base = await super.getLayoutSnapshot();
+        //     // const order = container.state.layouts.map((x) => x.layoutName).filter((x) => !!base.layouts[x]);
+        //     return { ...base, order };
+        // }
 
         applyLayoutSnapshot = async (snapshot: TabsSnapshot): Promise<void> => {
             console.log(`applyLayoutSnapshot() called`);
-            const order = this.checkOrder(snapshot);
+            // const order = this.checkOrder(snapshot);
             const { layouts } = snapshot;
             const initialLayout = {
                 type: 'stack',
@@ -69,7 +69,8 @@ const makeOverride = (container: TabsContainer) => (Base: OpenFin.LayoutManagerC
             // save the counter for naming new tabs, we name our tabs 1-based so add 1
             const nextTabValue = Object.keys(layouts).length + 1;
             container.setState({
-                layouts: order.map((layoutName: string) => ({ layoutName, layout: layouts[layoutName] })),
+                // layouts: order.map((layoutName: string) => ({ layoutName, layout: layouts[layoutName] })),
+                layouts: Object.keys(layouts).map((layoutName: string) => ({ layoutName, layout: layouts[layoutName] })),
                 initialLayout,
                 nextTabValue
             });
