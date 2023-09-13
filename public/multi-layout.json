@@ -37,6 +37,10 @@
         "name": "manual-test-platform-default",
         "frame": true,
         "layout": {
+          "settings": {
+            "preventDragIn": true,
+            "preventDragOut": true
+          },
           "content": [
             {
               "type": "stack",
@@ -56,6 +60,10 @@
         "layoutSnapshot": {
           "layouts": {
             "tab1": {
+              "settings": {
+                "preventDragIn": true,
+                "preventDragOut": true
+              },
               "content": [
                 {
                   "type": "column",
@@ -147,6 +155,10 @@
               ]
             },
             "tab2": {
+              "settings": {
+                "preventDragIn": true,
+                "preventDragOut": true
+              },
               "content": [
                 {
                   "type": "row",
@@ -192,6 +204,10 @@
               ]
             },
             "tab3": {
+              "settings": {
+                "preventDragIn": true,
+                "preventDragOut": true
+              },
               "content": [
                 {
                   "type": "row",
