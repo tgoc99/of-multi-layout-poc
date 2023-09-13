@@ -1,13 +1,19 @@
 This is an example of OpenFin multi-layouts. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).  An OpenFin app manifest was added at public/multi-layout.json.  We are using the default platform provider (no HTML/js in this project for the platform provider).  The logic for the platform window is in the `app` folder. All of the multi-layout logic is in `page.tsx`.
 
 ## Getting Started
-First, run the development server:
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
 ```
 
-Then, launch the OpenFin platform:
+Then, in a seperate window, launch the OpenFin platform:
 ```bash
 npm run launch
 ```
