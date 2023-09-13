@@ -28,9 +28,7 @@
       }
     },
     "defaultViewOptions": {
-      "backgroundColor": "#111118",
-      "detachOnClose": true,
-      "closeBehavior": "hide"
+      "backgroundColor": "#111118"
     }
   },
   "snapshot": {
@@ -75,8 +73,8 @@
                                   "type": "component",
                                   "componentName": "view",
                                   "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://www.tradingview.com/chart/"
+                                    "processAffinity": "ps_tab1",
+                                    "url": "https://www.tradingview.com/chart/?symbol=NASDAQ%3AAAPL"
                                   }
                                 }
                               ]
@@ -93,43 +91,7 @@
                                   "type": "component",
                                   "componentName": "view",
                                   "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
+                                    "processAffinity": "ps_tab1",
                                     "url": "https://finance.google.com"
                                   }
                                 }
@@ -152,8 +114,8 @@
                                   "type": "component",
                                   "componentName": "view",
                                   "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://www.tradingview.com/chart/"
+                                    "processAffinity": "ps_tab1",
+                                    "url": "https://www.tradingview.com/chart/?symbol=NASDAQ%3AMSFT"
                                   }
                                 }
                               ]
@@ -170,198 +132,8 @@
                                   "type": "component",
                                   "componentName": "view",
                                   "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://finance.google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "row",
-                      "content": [
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://www.tradingview.com/chart/"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://finance.google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "row",
-                      "content": [
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://www.tradingview.com/chart/"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://finance.google.com"
+                                    "processAffinity": "ps_tab1",
+                                    "url": "https://www.marketwatch.com/markets?mod=top_nav"
                                   }
                                 }
                               ]
@@ -375,314 +147,41 @@
               ]
             },
             "tab2": {
-              "_lazyLoad": true,
               "content": [
                 {
-                  "type": "column",
+                  "type": "row",
                   "content": [
                     {
-                      "type": "row",
+                      "type": "column",
                       "content": [
                         {
-                          "type": "column",
+                          "type": "stack",
                           "content": [
                             {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://www.tradingview.com/chart/"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://finance.google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "processAffinity": "ps_tab2",
+                                "url": "https://www.tradingview.com/chart/?symbol=NASDAQ%3ATSLA"
+                              }
                             }
                           ]
                         }
                       ]
                     },
                     {
-                      "type": "row",
+                      "type": "column",
                       "content": [
                         {
-                          "type": "column",
+                          "type": "stack",
                           "content": [
                             {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://www.tradingview.com/chart/"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://finance.google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "row",
-                      "content": [
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://www.tradingview.com/chart/"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://finance.google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "row",
-                      "content": [
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://www.tradingview.com/chart/"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://finance.google.com"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "column",
-                          "content": [
-                            {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_2",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "processAffinity": "ps_tab2",
+                                "url": "https://finance.yahoo.com"
+                              }
                             }
                           ]
                         }
@@ -695,44 +194,39 @@
             "tab3": {
               "content": [
                 {
-                  "type": "column",
+                  "type": "row",
                   "content": [
                     {
-                      "type": "row",
+                      "type": "column",
                       "content": [
                         {
-                          "type": "column",
+                          "type": "stack",
                           "content": [
                             {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://www.tradingview.com/chart/"
-                                  }
-                                }
-                              ]
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "processAffinity": "ps_tab3",
+                                "url": "https://www.tradingview.com/chart/?symbol=IVV"
+                              }
                             }
                           ]
-                        },
+                        }
+                      ]
+                    },
+                    {
+                      "type": "column",
+                      "content": [
                         {
-                          "type": "column",
+                          "type": "stack",
                           "content": [
                             {
-                              "type": "stack",
-                              "content": [
-                                {
-                                  "type": "component",
-                                  "componentName": "view",
-                                  "componentState": {
-                                    "processAffinity": "ps_1",
-                                    "url": "https://google.com"
-                                  }
-                                }
-                              ]
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "processAffinity": "ps_tab3",
+                                "url": "https://bloomberg.com"
+                              }
                             }
                           ]
                         }
