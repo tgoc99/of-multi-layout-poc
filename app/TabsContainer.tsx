@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import { Box, Tab, Tabs } from "@mui/material";
 import OpenFin, { fin } from "@openfin/core";
@@ -16,12 +15,16 @@ type LayoutState = {
   layout: OpenFin.LayoutOptions;
 };
 
-const makeOverride =
-  (setLayouts: React.Dispatch, setCurrentActiveTab: React.Dispatch) =>
-  (Base: OpenFin.LayoutManagerConstructor<OpenFin.LayoutSnapshot>) =>
+export default function TabsContainer(): JSX.Element {
+  const [layouts, setLayouts] = React.useState<LayoutState[]>([]);
+  const [currentActiveTab, setCurrentActiveTab] = React.useState<number>(0);
+
+  const layoutManagerOverride = (
+    Base: OpenFin.LayoutManagerConstructor<OpenFin.LayoutSnapshot>
+  ) =>
     class POCOverride extends Base {
       // OpenFin internals call this method in layout initialization, here we use it to set our React state
-      applyLayoutSnapshot = ({ layouts }: OpenFin.LayoutSnapshot): void => {
+      applyLayoutSnapshot = async ({ layouts }: OpenFin.LayoutSnapshot) => {
         // This logic turns a JS Object into an array, per JS internals, order of object keys in the array is not guaranteed
         setLayouts(
           Object.keys(layouts).map((layoutName: string) => ({
@@ -45,14 +48,8 @@ const makeOverride =
       };
     };
 
-export default function TabsContainer(): JSX.Element {
-  const [layouts, setLayouts] = React.useState<LayoutState[]>([]);
-  const [currentActiveTab, setCurrentActiveTab] = React.useState<number>(0);
-
   useEffect(() => {
-    fin.Platform.Layout.init({
-      layoutManagerOverride: makeOverride(setLayouts, setCurrentActiveTab),
-    });
+    fin.Platform.Layout.init({ layoutManagerOverride });
   }, []);
 
   const handleTabChange = (_: React.SyntheticEvent, index: number) => {
@@ -98,7 +95,8 @@ const LayoutContainer = ({
     const container = containerRef.current!;
     fin.Platform.Layout.create({ container, layout, layoutName });
     return () => {
-      fin.Platform.Layout.destroy({ layoutName });
+      const layoutIdentity = { layoutName, ...fin.me.identity };
+      fin.Platform.Layout.destroy(layoutIdentity);
     };
   }, []);
 

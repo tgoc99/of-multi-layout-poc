@@ -49,7 +49,6 @@
                   "type": "component",
                   "componentName": "view",
                   "componentState": {
-                    "processAffinity": "ps_1",
                     "url": "http://localhost:3000/"
                   }
                 }
@@ -81,7 +80,6 @@
                                   "type": "component",
                                   "componentName": "view",
                                   "componentState": {
-                                    "processAffinity": "ps_tab1",
                                     "url": "https://www.tradingview.com/chart/?symbol=NASDAQ%3AAAPL"
                                   }
                                 }
@@ -99,7 +97,6 @@
                                   "type": "component",
                                   "componentName": "view",
                                   "componentState": {
-                                    "processAffinity": "ps_tab1",
                                     "url": "https://finance.google.com"
                                   }
                                 }
@@ -122,7 +119,6 @@
                                   "type": "component",
                                   "componentName": "view",
                                   "componentState": {
-                                    "processAffinity": "ps_tab1",
                                     "url": "https://www.tradingview.com/chart/?symbol=NASDAQ%3AMSFT"
                                   }
                                 }
@@ -140,7 +136,6 @@
                                   "type": "component",
                                   "componentName": "view",
                                   "componentState": {
-                                    "processAffinity": "ps_tab1",
                                     "url": "https://www.marketwatch.com/markets?mod=top_nav"
                                   }
                                 }
@@ -173,7 +168,6 @@
                               "type": "component",
                               "componentName": "view",
                               "componentState": {
-                                "processAffinity": "ps_tab2",
                                 "url": "https://www.tradingview.com/chart/?symbol=NASDAQ%3ATSLA"
                               }
                             }
@@ -191,8 +185,7 @@
                               "type": "component",
                               "componentName": "view",
                               "componentState": {
-                                "processAffinity": "ps_tab2",
-                                "url": "https://finance.yahoo.com"
+                                "url": "https://openfin-iex.experolabs.com/#/watchlist"
                               }
                             }
                           ]
@@ -222,7 +215,6 @@
                               "type": "component",
                               "componentName": "view",
                               "componentState": {
-                                "processAffinity": "ps_tab3",
                                 "url": "https://www.tradingview.com/chart/?symbol=IVV"
                               }
                             }
@@ -240,7 +232,6 @@
                               "type": "component",
                               "componentName": "view",
                               "componentState": {
-                                "processAffinity": "ps_tab3",
                                 "url": "https://bloomberg.com"
                               }
                             }
