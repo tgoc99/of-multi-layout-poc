@@ -1,24 +1,32 @@
-This is an example of OpenFin multi-layouts. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).  An OpenFin app manifest was added at public/multi-layout.json.  We are using the default platform provider (no HTML/js in this project for the platform provider).  The logic for the platform window is in the `app` folder. All of the multi-layout logic is in `page.tsx`.
+This is an example of OpenFin multi-layouts. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). An OpenFin app manifest was added at public/multi-layout.json. We are using the default platform provider (no HTML/js in this project for the platform provider). The logic for the platform window is in the `app` folder. All of the multi-layout logic is in `TabsContainer.tsx`.
 
 ## Getting Started
+
 First, install dependencies:
 
 ```bash
 npm install
 ```
 
-Then, run the development server:
+Then, build the Next.js app:
 
 ```bash
-npm run dev
+npm run build
 ```
 
-Then, in a seperate window, launch the OpenFin platform:
+Then, start the HTTP server:
+
+```bash
+npm start
+```
+
+Then, in a seperate terminal, launch the OpenFin platform:
+
 ```bash
 npm run launch
 ```
 
-This will launch the OpenFin platform, which will open up a single platform window as described in the manifest that contains 3 different layouts. In order to create another window with multiple layouts, you can run `fin.Platform.getCurrentSync().createWindow()` with the correct window options.
+This will launch the OpenFin platform, which will open up a single platform window as described in the manifest that contains 3 different layouts. In order to create another window with multiple layouts, you can run `fin.Platform.getCurrentSync().createWindow()` with [window options](https://developer.openfin.co/docs/tsdoc/canary/interfaces/OpenFin.WindowCreationOptions.html) that includes a [layoutSnapshot](https://developer.openfin.co/docs/tsdoc/canary/interfaces/OpenFin.WindowCreationOptions.html#layoutSnapshot).
 
 ## Learn More
 
