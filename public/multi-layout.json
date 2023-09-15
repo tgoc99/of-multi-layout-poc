@@ -7,6 +7,7 @@
     "uuid": "multi-layout",
     "name": "multi-layout",
     "applicationIcon": "https://openfin.github.io/golden-prototype/favicon.ico",
+    "viewProcessAffinityStrategy": "different",
     "defaultWindowOptions": {
       "viewsPreventingClose": "layout",
       "url": "http://localhost:3000",
