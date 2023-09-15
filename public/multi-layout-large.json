@@ -1,0 +1,593 @@
+{
+  "runtime": {
+    "arguments": "--inspect",
+    "version": "canary"
+  },
+  "platform": {
+    "uuid": "multi-layout",
+    "name": "multi-layout",
+    "applicationIcon": "https://openfin.github.io/golden-prototype/favicon.ico",
+    "viewProcessAffinityStrategy": "different",
+    "defaultWindowOptions": {
+      "viewsPreventingClose": "layout",
+      "url": "http://localhost:3000",
+      "waitForPageLoad": true,
+      "backgroundColor": "#111118",
+      "backgroundThrottling": true,
+      "autoShow": true,
+      "viewVisibility": {
+        "showViewsOnSplitterDrag": {
+          "enabled": true
+        },
+        "showViewsOnTabDrag": {
+          "enabled": true
+        },
+        "showViewsOnWindowResize": {
+          "enabled": true,
+          "paintIntervalMs": 0
+        }
+      }
+    },
+    "defaultViewOptions": {
+      "backgroundColor": "#111118"
+    }
+  },
+  "snapshot": {
+    "windows": [
+      {
+        "name": "manual-test-platform-default",
+        "frame": true,
+        "layout": {
+          "settings": {
+            "preventDragIn": true,
+            "preventDragOut": true
+          },
+          "content": [
+            {
+              "type": "stack",
+              "content": [
+                {
+                  "type": "component",
+                  "componentName": "view",
+                  "componentState": {
+                    "url": "http://localhost:3000/"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "layoutSnapshot": {
+          "layouts": {
+            "tab1": {
+              "settings": {
+                "preventDragIn": true,
+                "preventDragOut": true
+              },
+              "content": [
+                {
+                  "type": "column",
+                  "content": [
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "tab2": {
+              "settings": {
+                "preventDragIn": true,
+                "preventDragOut": true
+              },
+              "content": [
+                {
+                  "type": "column",
+                  "content": [
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "tab3": {
+              "settings": {
+                "preventDragIn": true,
+                "preventDragOut": true
+              },
+              "content": [
+                {
+                  "type": "column",
+                  "content": [
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "content": [
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "stack",
+                          "content": [
+                            {
+                              "type": "component",
+                              "componentName": "view",
+                              "componentState": {
+                                "url": "https://www.tradingview.com/chart/"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}
