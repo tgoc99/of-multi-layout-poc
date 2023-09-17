@@ -1,32 +1,29 @@
 "use client";
 import { Box, Tab, Tabs } from "@mui/material";
 import OpenFin, { fin } from "@openfin/core";
-import React, { CSSProperties, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
+import { Layout } from "./Layout";
+import { LayoutState, styles } from "./types";
 
-const styles: Record<string, CSSProperties> = {
-  tab: { padding: "4px 8px", minHeight: "28px", height: "28px" },
-  tabIndicator: { transition: "all 0.08s linear" },
-  tabContainer: { minHeight: "32px", height: "32px", padding: 0 },
-  layoutContainer: { height: "100%", width: "100%", overflow: "hidden" },
-};
-
-type LayoutState = {
-  layoutName: string;
-  layout: OpenFin.LayoutOptions;
-};
-
-export default function TabsContainer(): JSX.Element {
-  const [layouts, setLayouts] = React.useState<LayoutState[]>([]);
+/**
+ * The div container providing a Tabbed interface of layouts.
+ * Responsible for initializing the platform layout with an overridden
+ * LayoutManager via fin.Platform.Layout APIs.
+ * See the {@link OpenFin.LayoutManager} LayoutManager type for docs (navigate to the symbol).
+ * You can also navigate to or hover over the overridden methods for more details.
+ */
+export const LayoutContainer = () => {
+  const [layoutState, setLayoutState] = React.useState<LayoutState[]>([]);
   const [currentActiveTab, setCurrentActiveTab] = React.useState<number>(0);
 
   const layoutManagerOverride = (
     Base: OpenFin.LayoutManagerConstructor<OpenFin.LayoutSnapshot>
   ) =>
-    class POCOverride extends Base {
-      // OpenFin internals call this method in layout initialization, here we use it to set our React state
+    class TabLayoutManager extends Base {
+      // OpenFin internals call this method during layout initialization, here we use it to set our React state
       applyLayoutSnapshot = async ({ layouts }: OpenFin.LayoutSnapshot) => {
         // This logic turns a JS Object into an array, per JS internals, order of object keys in the array is not guaranteed
-        setLayouts(
+        setLayoutState(
           Object.keys(layouts).map((layoutName: string) => ({
             layoutName,
             layout: layouts[layoutName],
@@ -35,10 +32,10 @@ export default function TabsContainer(): JSX.Element {
       };
 
       // Not necessary for this example - to be called by OpenFin API internals
-      // (i.e. replaceLayout API or to surface the corresponding layout when view.focus() is called)
+      // (i.e. replaceLayout API or to show the corresponding layout when view.focus() is called)
       public showLayout = async (id: OpenFin.LayoutIdentity) => {
         if (id.layoutName) {
-          const newIndex = layouts.findIndex(
+          const newIndex = layoutState.findIndex(
             (x) => x.layoutName === id.layoutName
           );
           if (newIndex !== -1) {
@@ -50,11 +47,13 @@ export default function TabsContainer(): JSX.Element {
 
   useEffect(() => {
     fin.Platform.Layout.init({ layoutManagerOverride });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to ensure this only runs once
 
   const handleTabChange = (_: React.SyntheticEvent, index: number) => {
-    // Active tab index state -> LayoutContainer "active" prop -> hidden state of container
-    setCurrentActiveTab(Math.min(index, layouts.length - 1));
+    // Constrain active tab to [0,layoutsLength]. This is used by
+    // LayoutContainer to decide whether to show or hide the layout.
+    setCurrentActiveTab(Math.min(index, layoutState.length - 1));
   };
 
   return (
@@ -68,13 +67,13 @@ export default function TabsContainer(): JSX.Element {
             sx={styles.tabContainer}
             TabIndicatorProps={{ sx: styles.tabIndicator }}
           >
-            {layouts.map(({ layoutName }) => (
+            {layoutState.map(({ layoutName }) => (
               <Tab sx={styles.tab} key={layoutName} label={layoutName} />
             ))}
           </Tabs>
         </Box>
-        {layouts.map((layout, i) => (
-          <LayoutContainer
+        {layoutState.map((layout, i) => (
+          <Layout
             active={currentActiveTab === i}
             key={layout.layoutName}
             {...layout}
@@ -82,29 +81,5 @@ export default function TabsContainer(): JSX.Element {
         ))}
       </Box>
     </div>
-  );
-}
-
-const LayoutContainer = ({
-  layoutName,
-  layout,
-  active,
-}: LayoutState & { active: boolean }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const container = containerRef.current!;
-    fin.Platform.Layout.create({ container, layout, layoutName });
-    return () => {
-      const layoutIdentity = { layoutName, ...fin.me.identity };
-      fin.Platform.Layout.destroy(layoutIdentity);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      className={active ? "" : "hidden"}
-      style={styles.layoutContainer}
-    ></div>
   );
 };

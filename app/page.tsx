@@ -1,7 +1,7 @@
 "use client";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline } from "@mui/material";
-import TabsContainer from "./TabsContainer";
+import { LayoutContainer } from "./components/LayoutContainer";
 
 const theme = createTheme({
   palette: {
@@ -14,7 +14,7 @@ export default function Page() {
     <ThemeProvider theme={theme}>
       {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
-      <TabsContainer />
+      <LayoutContainer />
     </ThemeProvider>
   );
 }
