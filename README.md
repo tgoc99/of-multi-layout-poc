@@ -1,6 +1,16 @@
 # OpenFin Multi-Layouts APIs
 
-This is an example of OpenFin Multi-Layout APIs. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). An OpenFin app manifest was added at public/multi-layout.json. We are using the default platform provider (no HTML/js in this project for the platform provider). The logic for the platform window is in the `app` folder. All of the multi-layout logic is in `TabsContainer.tsx`.
+This is an example of OpenFin Multi-Layout APIs. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). An OpenFin app manifest was added at `public/multi-layout.json`. We are using the default platform provider (no HTML/js in this project for the platform provider). The logic for the platform window is in the `app` folder. All of the multi-layout logic is in `app/components/`.
+
+### Release Notes
+
+<b>This sample is using the pre-release version of OpenFin v34. This is not an LTS version and may contain bugs as it has not gone through a full release cycle.</b>
+
+Current known issues with the new multi-layouts APIs:
+
+- Upon initial launch, hidden layouts have not been resized and may jitter slightly the first time they are opened. This also happens when resizing the window and then switching to a different layout.
+- Documentation has not been published yet. Please navigate to the type OpenFin.LayoutManager to see more info. You can find this info in node_modules/@openfin/core/out/mock.d.ts
+- Drag/drop has not been fully tested in this pre-release, so it has been disabled in the manifests in this repo.
 
 ## Getting Started
 
@@ -30,19 +40,22 @@ npm run launch
 
 This will launch the OpenFin platform, which will open up a single platform window as described in the manifest that contains 3 different layouts. In order to create another window with multiple layouts, you can run `fin.Platform.getCurrentSync().createWindow()` with [window options](https://developer.openfin.co/docs/tsdoc/canary/interfaces/OpenFin.WindowCreationOptions.html) that includes a [layoutSnapshot](https://developer.openfin.co/docs/tsdoc/canary/interfaces/OpenFin.WindowCreationOptions.html#layoutSnapshot).
 
-## Visibility CSS
+## CSS Recommendation for hidden layouts
 
-It is recommended to use `display: none` CSS setting to hide the divs for all inactive layouts. (We do not have anything planned for supporting `visibility: hidden` at this time.)
+It is recommended to use the `display: none` CSS setting to hide the divs for all inactive layouts. (We do not have anything planned for supporting `visibility: hidden` at this time.)
 
 ## Primary APIs
 
 - `fin.Platform.Layout.init({ layoutManagerOverride })`
+  - By supplying the override OpenFin no longer creates the layouts, you are responsible for creating and destroying layouts. In this override, you will supply a class that implements the hook `applySnapshot` which will be called once the platform window is created.
 - `fin.Platform.Layout.create({ layoutName, layout, container })`
+  - Call this API once per layout. It is recommended to set your component state via the above `applySnapshot` override and in turn your layouts should react to the component state changes.
 - `fin.Platform.Layout.destroy(layoutIdentity)`
+  - Call this API when closing a layout.
 
 # Optimizing content for Tabs
 
-This repository demonstrates how usage of our new Multi-Layout API can improve your application’s layout switching performance, compared to usage of Layout.replace(). Content does not have to re-render in our Multi-Layout implementation, which results in significant visual and performance improvements when switching between Layouts.
+This repository demonstrates how usage of our new Multi-Layout API can improve your application’s layout switching performance, compared to usage of `fin.Platform.Layout.replace()`. Content does not have to re-render in our Multi-Layout implementation, which results in significant visual and performance improvements when switching between Layouts.
 
 ### Process Affinity
 
