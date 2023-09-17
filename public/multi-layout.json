@@ -1,7 +1,7 @@
 {
   "runtime": {
     "arguments": "--inspect",
-    "version": "canary"
+    "version": "34.118.78.53"
   },
   "platform": {
     "uuid": "multi-layout",
@@ -9,6 +9,9 @@
     "applicationIcon": "https://openfin.github.io/golden-prototype/favicon.ico",
     "viewProcessAffinityStrategy": "different",
     "defaultWindowOptions": {
+      "defaultLeft": 60,
+      "defaultTop": 60,
+      "closeOnLastViewRemoved": false,
       "viewsPreventingClose": "layout",
       "url": "http://localhost:3000",
       "waitForPageLoad": true,
@@ -35,28 +38,8 @@
   "snapshot": {
     "windows": [
       {
-        "name": "manual-test-platform-default",
+        "name": "multi-layout-window-1",
         "frame": true,
-        "layout": {
-          "settings": {
-            "preventDragIn": true,
-            "preventDragOut": true
-          },
-          "content": [
-            {
-              "type": "stack",
-              "content": [
-                {
-                  "type": "component",
-                  "componentName": "view",
-                  "componentState": {
-                    "url": "http://localhost:3000/"
-                  }
-                }
-              ]
-            }
-          ]
-        },
         "layoutSnapshot": {
           "layouts": {
             "tab1": {
