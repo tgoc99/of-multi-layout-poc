@@ -13,6 +13,14 @@ Current known issues with the new Multi-Layouts APIs:
 - Upon initial launch, hidden layouts have not been resized and may jitter slightly the first time they are opened. This also happens when resizing the window and then switching to a different layout.
 - Documentation has not been published yet. Please navigate to the type OpenFin.LayoutManager to see more info. You can find this info in node_modules/@openfin/core/out/mock.d.ts
 
+### Bugs to be fixed by the Stable Release (LTS)
+
+We plan on fixing these bugs before full LTS release.
+
+- Initial launch slight jitter when switching tabs
+- Calling `Layout.replace()` repeatedly in quick succession sometimes closes the platform
+- Calling `Layout.replace()` repeatedly logs a warning that there is a listener leak
+- Documentation will be updated + published
 
 ## Getting Started
 
