@@ -9,6 +9,7 @@
     "applicationIcon": "https://openfin.github.io/golden-prototype/favicon.ico",
     "viewProcessAffinityStrategy": "different",
     "defaultWindowOptions": {
+      "frame": true,
       "defaultLeft": 60,
       "defaultTop": 60,
       "closeOnLastViewRemoved": false,
@@ -39,14 +40,9 @@
     "windows": [
       {
         "name": "multi-layout-window-1",
-        "frame": true,
         "layoutSnapshot": {
           "layouts": {
             "tab1": {
-              "settings": {
-                "preventDragIn": true,
-                "preventDragOut": true
-              },
               "content": [
                 {
                   "type": "column",
@@ -134,10 +130,6 @@
               ]
             },
             "tab2": {
-              "settings": {
-                "preventDragIn": true,
-                "preventDragOut": true
-              },
               "content": [
                 {
                   "type": "row",
@@ -181,10 +173,6 @@
               ]
             },
             "tab3": {
-              "settings": {
-                "preventDragIn": true,
-                "preventDragOut": true
-              },
               "content": [
                 {
                   "type": "row",
