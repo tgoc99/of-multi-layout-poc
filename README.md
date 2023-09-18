@@ -1,6 +1,6 @@
 # OpenFin Multi-Layouts APIs
 
-This is a sample showcasing how to leverage recent updates to the OpenFin's Multi-Layout APIs. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). An OpenFin application manifest was added at `public/multi-layout.json`. OpenFin is using the default Platform Provider (no HTML/js in this project for the platform provider). The logic for the Platform Window is in the `app` folder. All of the multi-layout logic is in `app/components/`.
+This is a sample showcasing how to leverage recent updates to the OpenFin's Multi-Layout APIs. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). An OpenFin application manifest was added at `public/multi-layout.json`. OpenFin is using the default Platform Provider (no HTML/js in this project for the platform provider). The logic for the Platform Window is in the `app` folder. All of the Multi-Layout logic is in `app/components/`.
 
 ![Multi-Layouts](multi-layouts.gif)
 
@@ -8,17 +8,20 @@ This is a sample showcasing how to leverage recent updates to the OpenFin's Mult
 
 <b>This sample is using the pre-release version of OpenFin v34. This is not an LTS version and may contain bugs as it has not gone through a full QA / Release cycle.</b>
 
-Current known issues with the new Multi-Layouts APIs:
-
-- Documentation has not been published yet. Please navigate to the type OpenFin.LayoutManager to see more info. You can find this info in node_modules/@openfin/core/out/mock.d.ts
-
-### Bugs to be fixed by the Stable Release (LTS)
+### Known Issues to be fixed by the Stable Release (LTS)
 
 We plan on fixing these bugs before full LTS release.
 
-- Calling `Layout.replace()` repeatedly in quick succession sometimes closes the platform
-- Calling `Layout.replace()` repeatedly logs a warning that there is a listener leak
-- Documentation will be updated + published
+- Documentation has not been published yet. Please navigate to the type OpenFin.LayoutManager to see more info. You can find this info in node_modules/@openfin/core/out/mock.d.ts.
+- Adding an existing named View to a different Layout in the same Window does not remove it from the old Layout. To avoid this, make sure every View has a unique name, or do not name them and OpenFin will generate a name.
+- Calling `Layout.replace()` repeatedly in quick succession sometimes closes the platform.
+- Calling `Layout.replace()` repeatedly logs a warning that there is a listener leak.
+- When the last View in a Layout is closed, there is no "cleanup hook" exposed to the consumer.
+- If you use the Window options `"viewsPreventingClose": "layout"` and `"closeOnLastViewRemoved": true` together, this will close the Window when closing the last View in a Layout, even if other layouts still exist. To workaround the issue, use `"viewsPreventingClose": "all"` with `"closeOnLastViewRemoved": true`.
+
+### Known Behaviors
+
+- Resizing a Window will not repaint/resize Views in a hidden Layout. Views, in a hidden Layout, will repaint to the new Window’s size once the Layout has been selected to be displayed. Note that this is known Chromium behavior and observed in Chrome.
 
 ## Getting Started
 
@@ -57,9 +60,9 @@ It is recommended to use the `display: none` CSS setting to hide the divs for al
 - `fin.Platform.Layout.init({ layoutManagerOverride })`
   - By supplying the override OpenFin no longer creates the layouts, Platform Providers are responsible for creating and destroying a Layout(s). In this override, Platform Providers will supply a class that implements the hook `applySnapshot` which will be called once the Platform Window is created.
 - `fin.Platform.Layout.create({ layoutName, layout, container })`
-  - Call this API once per layout. It is recommended to set your component state via the above `applySnapshot` override and in turn your layouts should react to the component state changes.
+  - Call this API once per Layout. It is recommended to set your component state via the above `applySnapshot` override and in turn your layouts should react to the component state changes.
 - `fin.Platform.Layout.destroy(layoutIdentity)`
-  - Call this API when closing a layout.
+  - Call this API when closing a Layout.
 
 # Optimizing content for Tabs
 
