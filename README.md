@@ -1,6 +1,6 @@
 # OpenFin Multi-Layouts APIs
 
-This is a sample showcasing how to leverage recent updates the OpenFin's Multi-Layout APIs. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). An OpenFin application manifest was added at `public/multi-layout.json`. OpenFin is using the default Platform Provider (no HTML/js in this project for the platform provider). The logic for the Platform Window is in the `app` folder. All of the multi-layout logic is in `app/components/`.
+This is a sample showcasing how to leverage recent updates to the OpenFin's Multi-Layout APIs. It was created as a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). An OpenFin application manifest was added at `public/multi-layout.json`. OpenFin is using the default Platform Provider (no HTML/js in this project for the platform provider). The logic for the Platform Window is in the `app` folder. All of the multi-layout logic is in `app/components/`.
 
 ![Multi-Layouts](multi-layouts.gif)
 
