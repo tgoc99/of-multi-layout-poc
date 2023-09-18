@@ -71,7 +71,7 @@ This repository demonstrates how usage of our new Multi-Layout API can improve y
 
 By default, OpenFin Views share the same process affinity with other same-origin Views. This means that the Views share the same execution context (both main thread and memory). Given JavaScript’s single-threaded nature, rendering of multiple Views that share the same process affinity can lead to bottlenecks during memory-intensive operations, such as during creation, heavy user interaction, and – most relevant to this demo – tab switching.
 
-OpenFin recommend's a new renderer process for every View in a Platform Provider's Layout. Platorms can achieve this by setting the key `platform.viewProcessAffinityStrategy` to “different” in the `platform` options in your manifest. (See [processAffinity docs](https://developer.openfin.co/docs/tsdoc/canary/interfaces/OpenFin.PlatformOptions.html#viewProcessAffinityStrategy)):
+OpenFin recommend's a new renderer process for every View in a Platform Provider's Layout. Platorms can achieve this by setting the key `platform.viewProcessAffinityStrategy` to `“different”` in the `platform` options in your manifest. (See [processAffinity docs](https://developer.openfin.co/docs/tsdoc/canary/interfaces/OpenFin.PlatformOptions.html#viewProcessAffinityStrategy)):
 
 <i>app.manifest.json:</i>
 
@@ -99,7 +99,7 @@ Additionally, be advised that your content could be doing something that forces 
 
 ### Resource-constrained Machines
 
-The Chromium engine employs a number of optimization techniques when running on machines with constrained resources. One of these optimizations involves reducing the total number of render processes, thereby forcing a number of applications into the same process affinity.
+The Chromium engine employs a number of optimization techniques when running on machines with constrained resources. One of these optimizations involves reducing the total number of render processes, thereby forcing a number of applications into the same process regardless of process affinity.
 
 In extreme cases, you can experience dropping frames. This can be particularly noticeable on VMs with limited memory and CPUs, and no GPUs - as in [this video example](https://www.loom.com/share/8be3f7cf4dd44a8fa77cd008e20c4576?sid=29e1ea87-aa1c-4ce0-9d24-89c05636d5f0).
 
