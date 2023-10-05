@@ -38,7 +38,3 @@ export type LayoutState = {
   layoutName: string;
   layout: OpenFin.LayoutOptions;
 };
-
-export type LayoutIdentity = {
-  layoutName: string
-} & OpenFin.Identity;
