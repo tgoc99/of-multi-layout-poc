@@ -65,7 +65,7 @@ export const LayoutContainer = () => {
     // prevent tab change logic
     ev.stopPropagation();
 
-    // change the active tab
+    // Update the index of the active tab
     setCurrentActiveTab(
       currentActiveTab < index
         ? currentActiveTab
