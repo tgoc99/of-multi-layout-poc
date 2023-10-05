@@ -21,12 +21,12 @@ export async function tearoutLayout(layoutIdentity: LayoutIdentity): Promise<voi
  */
 export async function transferLayout(layoutIdentity: LayoutIdentity): Promise<void> {
     const originLayout = fin.Platform.Layout.wrapSync(layoutIdentity);
-    // Do not allow inter-window transfer or transfer between applications
+    // Do not allow inter-window transfer or transfer between applications,
     if (layoutIdentity.name === fin.me.identity.name || layoutIdentity.uuid !== fin.me.identity.uuid) {
         return;
     }
-    // Get origin Layout views
+    // Get origin Layout views.
     const layoutViews = await originLayout.getCurrentViews();
-    // Re-parent origin Layout views target 
+    // Re-parent origin Layout views to target window.
     await Promise.all(layoutViews.map((v: OpenFin.View) => v.attach(fin.me.identity)));
 }
