@@ -1,7 +1,7 @@
 {
   "runtime": {
     "arguments": "--inspect",
-    "version": "34.118.78.53"
+    "version": "alpha-v34"
   },
   "platform": {
     "uuid": "multi-layout",
@@ -42,7 +42,7 @@
         "name": "multi-layout-window-1",
         "layoutSnapshot": {
           "layouts": {
-            "tab1": {
+            "51804508-a67b-453a-9b78-ceab920d18b9": {
               "content": [
                 {
                   "type": "column",
@@ -263,7 +263,7 @@
                 }
               ]
             },
-            "tab2": {
+            "b3d8d758-69d1-4ad1-9c16-ec6a2cda1bde": {
               "content": [
                 {
                   "type": "column",
@@ -335,7 +335,7 @@
                 }
               ]
             },
-            "tab3": {
+            "d706793b-ba65-4742-a912-1ba58b0b0185": {
               "content": [
                 {
                   "type": "column",
