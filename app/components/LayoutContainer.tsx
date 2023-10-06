@@ -1,12 +1,18 @@
 "use client";
 import { Box, IconButton, Tab, Tabs, TextField } from "@mui/material";
-import { Close, Add, OpenInNew, SystemUpdateAlt, Shuffle } from "@mui/icons-material";
+import {
+  Close,
+  Add,
+  OpenInNew,
+  SystemUpdateAlt,
+  Shuffle,
+} from "@mui/icons-material";
 import OpenFin, { fin } from "@openfin/core";
 import React, { useEffect } from "react";
 import { Layout } from "./Layout";
 import { DEFAULT_LAYOUT, LayoutState, styles } from "./types";
 import { tearoutLayout, transferLayout } from "./move-layout";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 /**
  * The div container providing a Tabbed interface of layouts.
@@ -18,7 +24,8 @@ import { v4 as uuid } from 'uuid';
 export const LayoutContainer = () => {
   const [layoutState, setLayoutState] = React.useState<LayoutState[]>([]);
   const [currentActiveTab, setCurrentActiveTab] = React.useState<number>(0);
-  const [layoutNameToTransfer, setlayoutNameToTransfer] = React.useState<string>();
+  const [layoutNameToTransfer, setlayoutNameToTransfer] =
+    React.useState<string>();
 
   const layoutManagerOverride = (
     Base: OpenFin.LayoutManagerConstructor<OpenFin.LayoutSnapshot>
@@ -41,15 +48,17 @@ export const LayoutContainer = () => {
 
       /**
        * Called by OpenFin API internals when the last view is removed from a Layout.
-       * Removing the Layout from state in this override results in the Layout 
+       * Removing the Layout from state in this override results in the Layout
        * component unmounting which triggers `fin.Platform.Layout.destroy()` as a result
        * of the Layout useEffect hook cleanup.
        */
       removeLayout = async (id: OpenFin.LayoutIdentity) => {
         if (id.layoutName) {
-          setLayoutState(prev => prev.filter(x => x.layoutName !== id.layoutName));
+          setLayoutState((prev) =>
+            prev.filter((x) => x.layoutName !== id.layoutName)
+          );
         }
-      }
+      };
 
       // Not necessary for this example - to be called by OpenFin API internals.
       // (i.e. replaceLayout API or to show the corresponding Layout when view.focus() is called)
@@ -82,13 +91,17 @@ export const LayoutContainer = () => {
 
     const newLayoutState = {
       layoutName: uuid(),
-      layout: DEFAULT_LAYOUT
-    } 
-    // Add new Layout to state resulting in Layout component rendering which calls `fin.Platform.Layout.create` on mount.
-    setLayoutState(prev => [...prev, newLayoutState]);
-  }
+      layout: DEFAULT_LAYOUT,
+    };
+    // Add new Layout to state resulting in Layout component rendering which calls `fin.Platform.Layout.create` as a result of the useEffect hook.
+    setLayoutState((prev) => [...prev, newLayoutState]);
+  };
 
-  const handleTabClose = (ev: React.SyntheticEvent, layoutName: string, index: number) => {
+  const handleTabClose = (
+    ev: React.SyntheticEvent,
+    layoutName: string,
+    index: number
+  ) => {
     // Prevent tab change logic.
     ev.stopPropagation();
 
@@ -100,62 +113,103 @@ export const LayoutContainer = () => {
     );
 
     // This will unmount the component and trigger `fin.Platform.Layout.destroy()` as a result of the Layout useEffect hook cleanup.
-    setLayoutState(prev => prev.filter(ls => ls.layoutName !== layoutName));
-  }
+    setLayoutState((prev) => prev.filter((ls) => ls.layoutName !== layoutName));
+  };
 
   // Re-orders the Layouts in this window randomly by shuffling Layout state.
   const handleShuffleLayouts = (_: React.SyntheticEvent) => {
-    setLayoutState(prev => [...prev.sort(() => Math.random() - 0.5)]);
-  }
+    setLayoutState((prev) => [...prev.sort(() => Math.random() - 0.5)]);
+  };
 
   // Check all other windows for a Layout with the entered name and transfer to this window if a match is found.
   const handleTransferLayout = async (_: React.SyntheticEvent) => {
     if (layoutNameToTransfer) {
-      const platformWindows = await fin.Application.getCurrentSync().getChildWindows();
-      const platformWindowOpts = await Promise.all(platformWindows.filter(x => x.identity.name !== fin.me.identity.name).map(x => x.getOptions()));
+      const platformWindows =
+        await fin.Application.getCurrentSync().getChildWindows();
+      const platformWindowOpts = await Promise.all(
+        platformWindows
+          .filter((x) => x.identity.name !== fin.me.identity.name)
+          .map((x) => x.getOptions())
+      );
       // Naively grab the first match, layoutName isn't unique across platform windows.
-      const layoutWindowOpts = platformWindowOpts.find(x => Object.keys(x.layoutSnapshot.layouts).includes(layoutNameToTransfer));
+      const layoutWindowOpts = platformWindowOpts.find((x) =>
+        Object.keys(x.layoutSnapshot.layouts).includes(layoutNameToTransfer)
+      );
       if (layoutWindowOpts) {
-        const layoutIdentity = { uuid: fin.me.identity.uuid, name: layoutWindowOpts.name, layoutName: layoutNameToTransfer };
+        const layoutIdentity = {
+          uuid: fin.me.identity.uuid,
+          name: layoutWindowOpts.name,
+          layoutName: layoutNameToTransfer,
+        };
         const originLayout = fin.Platform.Layout.wrapSync(layoutIdentity);
         const layout = await originLayout.getConfig();
+        // This call will attach all the views in the origin layout to this current window.
         await transferLayout(layoutIdentity);
         // Add new Layout to state resulting in Layout component rendering which calls `fin.Platform.Layout.create` on mount.
-        setLayoutState(prev => [
+        // Note that since all the views are now attached to this window, and we use Layout.create with the config from
+        // the call to layout.getConfig() - the layout will correctly place all the views organized the same way.
+        setLayoutState((prev) => [
           ...prev,
           {
             layoutName: layoutNameToTransfer,
-            layout
-          }
+            layout,
+          },
         ]);
       } else {
-        console.warn(`No other Windows in this Platform contain a Layout with layoutName: ${layoutNameToTransfer}`);
+        console.warn(
+          `No other Windows in this Platform contain a Layout with layoutName: ${layoutNameToTransfer}`
+        );
       }
     }
-  }
+  };
 
   // Tearout the currently active Layout into its own window.
   const handleTearoutLayout = async (_: React.SyntheticEvent) => {
-    const layoutIdentity = { ...fin.me.identity, layoutName: layoutState[currentActiveTab].layoutName };
+    const layoutIdentity = {
+      ...fin.me.identity,
+      layoutName: layoutState[currentActiveTab].layoutName,
+    };
     await tearoutLayout(layoutIdentity);
     setCurrentActiveTab(0);
-  }
+  };
 
   return (
     <div id="layout-container">
       <Box sx={{ width: "100%", height: "100%" }}>
         <Box sx={styles.tabControlsContainer}>
-          <IconButton sx={styles.iconButton} title="add tab" onClick={handleTabAdd}>
+          <IconButton
+            sx={styles.iconButton}
+            title="add tab"
+            onClick={handleTabAdd}
+          >
             <Add sx={styles.smallIcon} />
           </IconButton>
-          <IconButton sx={styles.iconButton} title="shuffle tabs" onClick={handleShuffleLayouts}>
+          <IconButton
+            sx={styles.iconButton}
+            title="shuffle tabs"
+            onClick={handleShuffleLayouts}
+          >
             <Shuffle sx={styles.smallIcon} fontSize="inherit" />
           </IconButton>
-          <IconButton sx={styles.iconButton} title="tearout active layout" onClick={handleTearoutLayout}>
+          <IconButton
+            sx={styles.iconButton}
+            title="tearout active layout"
+            onClick={handleTearoutLayout}
+          >
             <OpenInNew sx={styles.smallIcon} fontSize="inherit" />
           </IconButton>
-          <TextField sx={{ padding: "4px" }} InputProps={{ sx: { height: "20px" }}} placeholder="layoutName to transfer" variant="outlined" onChange={e => setlayoutNameToTransfer(e.target.value)} />
-          <IconButton sx={styles.iconButton} title="transfer layout by name" onClick={handleTransferLayout}>
+          <TextField
+            sx={{ padding: "4px" }}
+            InputProps={{ sx: { height: "20px" } }}
+            placeholder="layoutName to transfer"
+            variant="outlined"
+            onChange={(e) => setlayoutNameToTransfer(e.target.value)}
+          />
+          <IconButton
+            sx={styles.iconButton}
+            title="transfer layout by name"
+            onClick={handleTransferLayout}
+          >
             <SystemUpdateAlt sx={styles.smallIcon} fontSize="inherit" />
           </IconButton>
         </Box>
@@ -168,7 +222,7 @@ export const LayoutContainer = () => {
             TabIndicatorProps={{ sx: styles.tabIndicator }}
           >
             {layoutState.map(({ layoutName }, i) => (
-              <Tab 
+              <Tab
                 sx={styles.tab}
                 key={layoutName}
                 label={layoutName}

@@ -9,6 +9,9 @@
     "applicationIcon": "https://openfin.github.io/golden-prototype/favicon.ico",
     "viewProcessAffinityStrategy": "different",
     "defaultWindowOptions": {
+      "experimental": {
+        "windowLogLevel": "verbose"
+      },
       "frame": true,
       "defaultLeft": 60,
       "defaultTop": 60,
