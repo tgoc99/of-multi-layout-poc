@@ -45,7 +45,7 @@
         "name": "multi-layout-window-1",
         "layoutSnapshot": {
           "layouts": {
-            "51804508-a67b-453a-9b78-ceab920d18b9": {
+            "chord": {
               "content": [
                 {
                   "type": "column",
@@ -266,7 +266,7 @@
                 }
               ]
             },
-            "b3d8d758-69d1-4ad1-9c16-ec6a2cda1bde": {
+            "secular": {
               "content": [
                 {
                   "type": "column",
@@ -338,7 +338,7 @@
                 }
               ]
             },
-            "d706793b-ba65-4742-a912-1ba58b0b0185": {
+            "motorist": {
               "content": [
                 {
                   "type": "column",
