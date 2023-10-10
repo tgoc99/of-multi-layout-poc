@@ -45,7 +45,7 @@
         "name": "multi-layout-window-1",
         "layoutSnapshot": {
           "layouts": {
-            "effbc882-2d2b-4679-a225-6b6f2ddd72a2": {
+            "skilled": {
               "content": [
                 {
                   "type": "column",
@@ -132,7 +132,7 @@
                 }
               ]
             },
-            "9df5b35e-4cfe-4180-8fd9-7b584202cf41": {
+            "reverse": {
               "content": [
                 {
                   "type": "row",
@@ -175,7 +175,7 @@
                 }
               ]
             },
-            "c454945d-1912-41c9-a9d4-468bb6969ef3": {
+            "loud": {
               "content": [
                 {
                   "type": "row",

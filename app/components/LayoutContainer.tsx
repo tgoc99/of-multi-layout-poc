@@ -12,7 +12,6 @@ import React, { useEffect } from "react";
 import { Layout } from "./Layout";
 import { DEFAULT_LAYOUT, LayoutState, styles } from "./types";
 import { tearoutLayout, transferLayout } from "./move-layout";
-import { v4 as uuid } from "uuid";
 
 /**
  * The div container providing a Tabbed interface of layouts.
@@ -85,12 +84,14 @@ export const LayoutContainer = () => {
     setCurrentActiveTab(Math.min(index, layoutState.length - 1));
   };
 
-  const handleTabAdd = (ev: React.SyntheticEvent) => {
+  const handleTabAdd = async (ev: React.SyntheticEvent) => {
     // Prevent tab change logic.
     ev.stopPropagation();
 
+    const { generate } = await import("random-words");
+
     const newLayoutState = {
-      layoutName: uuid(),
+      layoutName: generate(1)[0],
       layout: DEFAULT_LAYOUT,
     };
     // Add new Layout to state resulting in Layout component rendering which calls `fin.Platform.Layout.create` as a result of the useEffect hook.
@@ -155,6 +156,8 @@ export const LayoutContainer = () => {
             layout,
           },
         ]);
+        // Update the index of the active tab.
+        setCurrentActiveTab(layoutState.length);
       } else {
         console.warn(
           `No other Windows in this Platform contain a Layout with layoutName: ${layoutNameToTransfer}`
