@@ -6,6 +6,7 @@ import {
   OpenInNew,
   SystemUpdateAlt,
   Shuffle,
+  CopyAll,
 } from "@mui/icons-material";
 import OpenFin, { fin } from "@openfin/core";
 import React, { useEffect } from "react";
@@ -23,7 +24,7 @@ import { tearoutLayout, transferLayout } from "./move-layout";
 export const LayoutContainer = () => {
   const [layoutState, setLayoutState] = React.useState<LayoutState[]>([]);
   const [currentActiveTab, setCurrentActiveTab] = React.useState<number>(0);
-  const [layoutNameToTransfer, setlayoutNameToTransfer] =
+  const [layoutIdentityToTransfer, setLayoutIdentityToTransfer] =
     React.useState<string>();
 
   const layoutManagerOverride = (
@@ -55,6 +56,13 @@ export const LayoutContainer = () => {
         if (id.layoutName) {
           setLayoutState((prev) =>
             prev.filter((x) => x.layoutName !== id.layoutName)
+          );
+
+          // Update the index of the active tab.
+          setCurrentActiveTab(
+            currentActiveTab < layoutState.length
+              ? currentActiveTab
+              : Math.max(0, currentActiveTab - 1)
           );
         }
       };
@@ -96,6 +104,8 @@ export const LayoutContainer = () => {
     };
     // Add new Layout to state resulting in Layout component rendering which calls `fin.Platform.Layout.create` as a result of the useEffect hook.
     setLayoutState((prev) => [...prev, newLayoutState]);
+    // Update the index of the active tab.
+    setCurrentActiveTab(layoutState.length);
   };
 
   const handleTabClose = (
@@ -124,45 +134,29 @@ export const LayoutContainer = () => {
 
   // Check all other windows for a Layout with the entered name and transfer to this window if a match is found.
   const handleTransferLayout = async (_: React.SyntheticEvent) => {
-    if (layoutNameToTransfer) {
-      const platformWindows =
-        await fin.Application.getCurrentSync().getChildWindows();
-      const platformWindowOpts = await Promise.all(
-        platformWindows
-          .filter((x) => x.identity.name !== fin.me.identity.name)
-          .map((x) => x.getOptions())
-      );
-      // Naively grab the first match, layoutName isn't unique across platform windows.
-      const layoutWindowOpts = platformWindowOpts.find((x) =>
-        Object.keys(x.layoutSnapshot.layouts).includes(layoutNameToTransfer)
-      );
-      if (layoutWindowOpts) {
-        const layoutIdentity = {
-          uuid: fin.me.identity.uuid,
-          name: layoutWindowOpts.name,
-          layoutName: layoutNameToTransfer,
-        };
-        const originLayout = fin.Platform.Layout.wrapSync(layoutIdentity);
-        const layout = await originLayout.getConfig();
-        // This call will attach all the views in the origin layout to this current window.
-        await transferLayout(layoutIdentity);
-        // Add new Layout to state resulting in Layout component rendering which calls `fin.Platform.Layout.create` on mount.
-        // Note that since all the views are now attached to this window, and we use Layout.create with the config from
-        // the call to layout.getConfig() - the layout will correctly place all the views organized the same way.
-        setLayoutState((prev) => [
-          ...prev,
-          {
-            layoutName: layoutNameToTransfer,
-            layout,
-          },
-        ]);
-        // Update the index of the active tab.
-        setCurrentActiveTab(layoutState.length);
-      } else {
-        console.warn(
-          `No other Windows in this Platform contain a Layout with layoutName: ${layoutNameToTransfer}`
-        );
-      }
+    if (layoutIdentityToTransfer) {
+      const layoutIdentity = JSON.parse(
+        layoutIdentityToTransfer
+      ) as OpenFin.LayoutIdentity;
+
+      // This util does everything to prepare popping in the views, except Layout.create()
+      const layout = await transferLayout(layoutIdentity);
+
+      // Add new Layout to state resulting in Layout component rendering which calls `fin.Platform.Layout.create` on mount.
+      // Note that since all the views are now attached to this window, and we use Layout.create with the config from
+      // the call to layout.getConfig() - the layout will correctly place all the views organized the same way.
+      setLayoutState((prev) => [
+        ...prev,
+        {
+          layoutName: layoutIdentity.layoutName,
+          layout,
+        },
+      ]);
+      // Update the index of the active tab.
+      setCurrentActiveTab(layoutState.length);
+
+      // clear the text field
+      setLayoutIdentityToTransfer("");
     }
   };
 
@@ -204,16 +198,31 @@ export const LayoutContainer = () => {
           <TextField
             sx={{ padding: "4px" }}
             InputProps={{ sx: { height: "20px" } }}
-            placeholder="layoutName to transfer"
+            placeholder="layoutIdentity"
             variant="outlined"
-            onChange={(e) => setlayoutNameToTransfer(e.target.value)}
+            value={layoutIdentityToTransfer}
+            onChange={(e) => setLayoutIdentityToTransfer(e.target.value)}
           />
           <IconButton
             sx={styles.iconButton}
-            title="transfer layout by name"
+            title="transfer layout by layout identity"
             onClick={handleTransferLayout}
           >
             <SystemUpdateAlt sx={styles.smallIcon} fontSize="inherit" />
+          </IconButton>
+          <IconButton
+            sx={styles.iconButton}
+            title="copy active layout identity"
+            onClick={() =>
+              fin.Clipboard.writeText({
+                data: JSON.stringify({
+                  ...fin.me.identity,
+                  layoutName: layoutState[currentActiveTab].layoutName,
+                }),
+              })
+            }
+          >
+            <CopyAll sx={styles.smallIcon} fontSize="inherit" />
           </IconButton>
         </Box>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
